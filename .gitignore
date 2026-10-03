@@ -18,6 +18,7 @@ __pycache__/
 Data/Raw/*
 Data/Interim/*
 Data/Processed/*
+!Data/Processed/historical_seed.csv
 
 # Local databases (we will configure production persistence separately)
 *.db
