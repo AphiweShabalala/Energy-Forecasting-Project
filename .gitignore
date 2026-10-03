@@ -1,0 +1,33 @@
+
+# Python environments
+venv/
+.venv/
+energy-forecasting/
+__pycache__/
+*.py[cod]
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Large datasets
+Data/Raw/*
+Data/Interim/*
+Data/Processed/*
+
+# Local databases (we will configure production persistence separately)
+*.db
+*.sqlite
+*.sqlite3
+
+# Editor and operating-system files
+.vscode/
+__MACOSX/
+.DS_Store
+
+# Keep the trained forecasting model and metadata tracked
+# Do not ignore models/

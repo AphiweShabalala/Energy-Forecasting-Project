@@ -1,0 +1,41 @@
+{
+    "model_type": "XGBRegressor",
+    "model_file": "xgboost_energy_forecaster.joblib",
+    "target": "target",
+    "forecast_horizon": "1 hour",
+    "features": [
+        "total_demand",
+        "lag_1",
+        "lag_2",
+        "lag_3",
+        "lag_24",
+        "lag_48",
+        "lag_168",
+        "hour",
+        "day_of_week",
+        "is_weekend",
+        "hour_sin",
+        "hour_cos",
+        "rolling_mean_24",
+        "rolling_std_24"
+    ],
+    "n_features": 14,
+    "metrics": {
+        "mae": 4606.74165656537,
+        "rmse": 6790.251859292796,
+        "naive_mae": 16475.71716786346,
+        "naive_rmse": 24779.796900802456,
+        "mae_improvement_over_naive_percent": 72.03920406238217,
+        "rmse_improvement_over_naive_percent": 72.59762908277548
+    },
+    "data_split": {
+        "method": "chronological",
+        "train_ratio": 0.8,
+        "test_ratio": 0.2
+    },
+    "cross_validation": {
+        "method": "TimeSeriesSplit",
+        "n_splits": 5
+    },
+    "random_state": 42
+}
