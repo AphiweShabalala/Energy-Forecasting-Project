@@ -25,9 +25,40 @@ def initialize_database():
         )
     """)
 
+    # Seed historical demand if the database is empty.
+    count = cursor.execute(
+        "SELECT COUNT(*) FROM historical_demand"
+    ).fetchone()[0]
+
+    if count == 0:
+        seed_path = (
+            Path(__file__).resolve().parents[3]
+            / "Data"
+            / "Processed"
+            / "historical_seed.csv"
+        )
+
+        if not seed_path.exists():
+            raise FileNotFoundError(
+                f"Historical seed file not found: {seed_path}"
+            )
+
+        seed_df = pd.read_csv(seed_path)
+
+        cursor.executemany(
+            """
+            INSERT INTO historical_demand
+            (datetime, total_demand)
+            VALUES (?, ?)
+            """,
+            seed_df[["datetime", "total_demand"]].itertuples(
+                index=False,
+                name=None,
+            ),
+        )
+
     connection.commit()
     connection.close()
-
 
 def get_latest_history(hours=168):
     """
